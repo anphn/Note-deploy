@@ -3,7 +3,6 @@
 ### Link reference
 - https://pve.proxmox.com/wiki/Cloud-Init_Support
 
-
 ## Using scripts
 
 - Edit variables
@@ -20,6 +19,7 @@
 ## Run on node proxmox
 
 ```bash 
+
 bash create-cloud-tempalte.sh 
 
 ```

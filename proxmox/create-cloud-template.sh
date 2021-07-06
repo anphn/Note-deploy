@@ -4,19 +4,7 @@ set -o errexit
 clear
 printf "\n*** This script will download a cloud image and create a Proxmox VM template from it. ***\n\n"
 
-### HOW TO USE
-### Pre-req:
-### - run on a Proxmox 6 server
-### - a dhcp server should be active on vmbr1
-###
-### - fork the gist and adapt the defaults (especially SSHKEY) as needed
-### - download latest version of the script:
-###   curl wget https://gist.githubusercontent.com/chriswayg/43fbea910e024cbe608d7dcb12cb8466/raw/create-cloud-template.sh > /usr/local/bin/create-cloud-template.sh && chmod -v +x /usr/local/bin/create-cloud-template.sh
-### - (optionally) prepare a cloudinit user-config.yml in the working directory
-###   this could be copied and modified from the cloudinit user dump at the end of this script
-### - run the script:
-###   $ create-cloud-template.sh
-### - clone the finished template from the Proxmox GUI and test
+
 ###
 ### NOTES:
 ### - links to cloud images:
@@ -218,8 +206,6 @@ qm set $VMID --ide2 local:cloudinit
 
 printf "\n** Specifying the cloud-init configuration format\n"
 qm set $VMID --citype $CITYPE
-
-printf "#** Made with create-cloud-template.sh - https://gist.github.com/chriswayg/43fbea910e024cbe608d7dcb12cb8466\n" >> /etc/pve/nodes/proxmox/qemu-server/$VMID.conf
 
 ## TODO: Also ask for a network configuration. Or create a config with routing for a static IP
 printf "\n*** The script can add a cloud-init configuration with users and SSH keys from a file in the current directory.\n"
