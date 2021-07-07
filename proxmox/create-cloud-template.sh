@@ -203,7 +203,7 @@ qm set $VMID --ipconfig0 ip=dhcp
 #qm set $VMID --ipconfig0 ip=10.10.10.222/24,gw=10.10.10.1
 
 printf "\n** Creating a cloudinit drive managed by Proxmox\n"
-qm set $VMID --ide2 local:cloudinit
+qm set $VMID --ide2 $STORAGE:cloudinit
 
 printf "\n** Specifying the cloud-init configuration format\n"
 qm set $VMID --citype $CITYPE
