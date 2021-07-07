@@ -60,6 +60,7 @@ case $OSNR in
   3)
     OSNAME=debian10
     VMID_DEFAULT=51200
+
     read -p "Enter a VM ID for $OSNAME [$VMID_DEFAULT]: " VMID
     VMID=${VMID:-$VMID_DEFAULT}
     VMIMAGE=debian-10-openstack-amd64.qcow2
@@ -188,7 +189,7 @@ printf "\n** Creating a VM with $MEMORY MB using network bridge $BRIDGE\n"
 qm create $VMID --name $OSNAME-cloud --memory $MEMORY --net0 virtio,bridge=$BRIDGE
 
 printf "\n** Importing the disk in qcow2 format (as 'Unused Disk 0')\n"
-qm importdisk $VMID /tmp/$VMIMAGE local -format $FORMAT
+qm importdisk $VMID /tmp/$VMIMAGE -format $FORMAT $STORAGE
 
 printf "\n** Attaching the disk to the vm using VirtIO SCSI\n"
 qm set $VMID --scsihw virtio-scsi-pci --scsi0 $STORAGE:vm-$VMID-disk-0
